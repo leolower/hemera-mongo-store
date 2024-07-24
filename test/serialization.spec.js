@@ -242,7 +242,7 @@ describe('Hemera-mongo-store with response serialization', function() {
             cmd: 'replaceById',
             collection: testCollection,
             data: {
-              $set: { name: 'foo' }
+              name: 'foo'
             },
             id: resp._id
           },

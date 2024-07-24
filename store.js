@@ -237,7 +237,7 @@ class MongoStore extends Store {
    *
    *
    * @param {any} req
-   * @param {any} data
+   * @param {any} data - Data should not contains atomic operators (eg: $set, $inc, $push, etc)
    * @returns
    * @memberof MongoStore
    */
