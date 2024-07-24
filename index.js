@@ -178,7 +178,8 @@ module.exports = Hp(hemeraMongoStore, {
     mongos: {},
     serializeResult: false,
     mongo: {
-      url: 'mongodb://localhost:27017/'
+      url: 'mongodb://localhost:27017/',
+      useNewUrlParser: true,
     },
     store: {
       replace: { upsert: true }
