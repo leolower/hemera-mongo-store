@@ -39,7 +39,8 @@ class MongoStore extends Store {
       }
       return op.then(resp => {
         return {
-          _ids: resp.insertedIds
+          // @see mongodb returns an object with the keys being the index of the array
+          _ids: Object.values(resp.insertedIds)
         }
       })
     } else if (req.data instanceof Object) {

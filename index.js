@@ -18,15 +18,13 @@ function hemeraMongoStore(hemera, opts, done) {
     return result
   }
 
-  Mongodb.MongoClient.connect(opts.mongo.url, opts.mongos.options, function(
-    err,
-    db
-  ) {
+  Mongodb.MongoClient.connect(opts.mongo.url, opts.mongos.options, function(err, client) {
     if (err) {
       done(err)
       return
     }
-
+    // Get the db from the mongodb client
+    const db = client.db()
     // from mongodb driver
     const dbName = db.databaseName
 
@@ -35,6 +33,7 @@ function hemeraMongoStore(hemera, opts, done) {
     }
 
     hemera.decorate('mongodb', {
+      // @todo we might need to pass the connected client instead of the lib
       client: Mongodb,
       db
     })
@@ -42,7 +41,7 @@ function hemeraMongoStore(hemera, opts, done) {
     // Gracefully shutdown
     hemera.ext('onClose', (ctx, done) => {
       hemera.log.debug('Mongodb connection closed!')
-      db.close(done)
+      client.close(done)
     })
 
     const Joi = hemera.joi
