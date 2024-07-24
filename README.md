@@ -41,6 +41,8 @@ hemera.use(require('hemera-mongo-store'), {
 npm run test
 ```
 
+* Remember: Tests uses the HemeraTestSuite package, it starts a NATS server in the local machine. Be aware of conflicts with other services, specially if you are using the default port (6242).
+
 ## Access multiple databases
 
 If you decide to use multiple MongoDB databases for your services you can use the `useDbAsTopicSuffix` option.
