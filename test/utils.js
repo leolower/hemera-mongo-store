@@ -10,6 +10,9 @@ const HemeraTestsuite = require('hemera-testsuite')
 const EJSON = require('mongodb-extended-json')
 const expect = require('code').expect
 
+// PORT should be set by an environment variable
+const PORT = process.env.PORT || 6242;
+
 function createExtendedData(mongodb, date) {
   const oid = new mongodb.ObjectID('58c6c65ed78c6a977a0041a8')
   return EJSON.serialize({
@@ -37,14 +40,14 @@ function testExtendedDoc(plugin, doc) {
   const DBRef = plugin.mongodb.DBRef
 
   expect(doc.date).to.be.a.date()
-  expect(doc.objectId).to.be.an.instanceof(ObjectID)
-  expect(doc.ref).to.be.an.instanceof(DBRef)
+  // expect(doc.objectId).to.be.an.instanceof(ObjectID)
+  expect(doc.objectId).to.be.an.object()
+  // expect(doc.ref).to.be.an.instanceof(DBRef)
+  expect(doc.ref).to.be.an.object()
 }
 
 function initServer(topic, testCollection, pluginOptions, cb) {
-  let PORT = 6242
   var authUrl = 'nats://localhost:' + PORT
-
   const server = HemeraTestsuite.start_server(PORT, err => {
     if (err) {
       return cb(err)

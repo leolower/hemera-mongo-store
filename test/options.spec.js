@@ -9,7 +9,8 @@ describe('Hemera-mongo-store options', function() {
   const testCollection = 'test'
   const options = {
     mongo: {
-      url: 'mongodb://localhost:27017'
+      url: 'mongodb://localhost:27017/test',
+      useNewUrlParser: true,
     },
     store: {
       update: { returnOriginal: false },

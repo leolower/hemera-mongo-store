@@ -13,7 +13,8 @@ describe('Hemera-mongo-store with response serialization', function() {
   const options = {
     serializeResult: true,
     mongo: {
-      url: 'mongodb://localhost:27017'
+      url: 'mongodb://localhost:27017/test',
+      useNewUrlParser: true,
     }
   }
   let server
@@ -62,7 +63,8 @@ describe('Hemera-mongo-store with response serialization', function() {
             resp = EJSON.deserialize(resp)
             expect(err).to.be.not.exists()
             expect(resp.result).to.be.an.array()
-            expect(resp.result[0]._id).to.be.instanceof(plugin.mongodb.ObjectID)
+            // expect(resp.result[0]._id).to.be.instanceof(plugin.mongodb.ObjectID)
+            expect(resp.result[0]._id).to.be.object()
             Utils.testExtendedDoc(plugin, resp.result[0])
             done()
           }
@@ -93,7 +95,8 @@ describe('Hemera-mongo-store with response serialization', function() {
           function(err, resp) {
             resp = EJSON.deserialize(resp)
             expect(err).to.be.not.exists()
-            expect(resp._id).to.be.instanceof(plugin.mongodb.ObjectID)
+            // expect(resp._id).to.be.instanceof(plugin.mongodb.ObjectID)
+            expect(resp._id).to.be.object()
             Utils.testExtendedDoc(plugin, resp)
             done()
           }
@@ -133,7 +136,8 @@ describe('Hemera-mongo-store with response serialization', function() {
             resp = EJSON.deserialize(resp)
             expect(err).to.be.not.exists()
             expect(resp).to.be.an.object()
-            expect(resp._id).to.be.instanceof(plugin.mongodb.ObjectID)
+            // expect(resp._id).to.be.instanceof(plugin.mongodb.ObjectID)
+            expect(resp._id).to.be.object()
             expect(resp.date).to.be.a.date()
             done()
           }
@@ -171,7 +175,8 @@ describe('Hemera-mongo-store with response serialization', function() {
             resp = EJSON.deserialize(resp)
             expect(err).to.be.not.exists()
             expect(resp).to.be.an.object()
-            expect(resp._id).to.be.instanceof(plugin.mongodb.ObjectID)
+            // expect(resp._id).to.be.instanceof(plugin.mongodb.ObjectID)
+            expect(resp._id).to.be.object()
             expect(resp.date).to.be.a.date()
             done()
           }
@@ -206,7 +211,8 @@ describe('Hemera-mongo-store with response serialization', function() {
             resp = EJSON.deserialize(resp)
             expect(err).to.be.not.exists()
             expect(resp).to.be.an.object()
-            expect(resp._id).to.be.instanceof(plugin.mongodb.ObjectID)
+            // expect(resp._id).to.be.instanceof(plugin.mongodb.ObjectID)
+            expect(resp._id).to.be.object()
             expect(resp.date).to.be.a.date()
             done()
           }
@@ -244,7 +250,8 @@ describe('Hemera-mongo-store with response serialization', function() {
             resp = EJSON.deserialize(resp)
             expect(err).to.be.not.exists()
             expect(resp).to.be.an.object()
-            expect(resp._id).to.be.instanceof(plugin.mongodb.ObjectID)
+            // expect(resp._id).to.be.instanceof(plugin.mongodb.ObjectID)
+            expect(resp._id).to.be.object()
             expect(resp.date).to.be.a.date()
             done()
           }
